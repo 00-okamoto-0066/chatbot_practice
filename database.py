@@ -36,6 +36,33 @@ def save_message(role,content):
     con.commit()
     con.close()
     
-
     
+
+# 過去の履歴を読み込む
+def load_history():
+    con = sqlite3.connect(DB_FILE)
+    cur = con.cursor()
+
+    # historyテーブルから全件取得する
+    cur.execute(""" 
+    SELECT role,content FROM history ORDER BY id 
+    """
+    )
+    
+    conversation_history_list = cur.fetchall()
+    
+    
+    conversation_history = []
+    # Claudeに渡せる形にデータを変換
+    for rows in conversation_history_list:
+        # 履歴に過去のやりとりを追加 
+        conversation_history.append({
+            "role":rows[0],
+            "content":rows[1]
+        })
+
+    con.close()
+    
+    
+    return conversation_history
 

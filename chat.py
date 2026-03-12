@@ -20,7 +20,8 @@ KEYWORDS = [
     ["給与", "給料", "年収", "月給", "賞与", "ボーナス"], 
     ["服装", "私服", "カジュアル", "ドレスコード"], 
     ["会社", "事業", "設立", "従業員", "技術","言語","規模"], 
-    ["応募", "申し込み", "エントリー","応募方法", "採用", "選考"]
+    ["応募", "申し込み", "エントリー","応募方法", "採用", "選考"],
+    ["ふざけ","アホ","バカ","うるさい","死","殺","クソ","ゴミ","詐欺","偽物","嘘","あ",]
 ]
 
 
@@ -47,8 +48,6 @@ def chat(user_questions):
     load_dotenv()  
     # Claudeに接続する準備(API)
     client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-    # データベースを作成
-    database.setup_database()
 
 
     # ユーザーの質問を受け取る
@@ -67,7 +66,7 @@ def chat(user_questions):
     # キーワードがユーザーの入力に含まれているか確認
     is_keyword = any(word in user_questions for words in KEYWORDS for word in words)
     
-    if len(conversation_history) >= 10:
+    if len(conversation_history) >= 12:
         
         # Claudeの返答も履歴に追加 
         conversation_history.append({

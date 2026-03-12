@@ -13,7 +13,15 @@ conversation_history = [
 
 
 # 質問に含まれるキーワードのリスト
-keywords = ["募集職種","仕事","業務", "勤務地","給与", "服装", "事業内容", "応募"]
+KEYWORDS = [
+    ["募集職種", "雇用", "正社員", "契約","試用"], 
+    ["仕事", "業務", "内容", "担当"], 
+    ["勤務地", "場所", "アクセス", "駅", "リモート","テレワーク"], 
+    ["給与", "給料", "年収", "月給", "賞与", "ボーナス"], 
+    ["服装", "私服", "カジュアル", "ドレスコード"], 
+    ["会社", "事業", "設立", "従業員", "技術","言語","規模"], 
+    ["応募", "申し込み", "エントリー","応募方法", "採用", "選考"]
+]
 
 
 #  job_info.txt を読み込む
@@ -57,8 +65,7 @@ def chat(user_questions):
 
 
     # キーワードがユーザーの入力に含まれているか確認
-    is_keyword = any(word in user_questions for word in keywords)
-    
+    is_keyword = any(word in user_questions for words in KEYWORDS for word in words)
     
     if len(conversation_history) >= 10:
         
